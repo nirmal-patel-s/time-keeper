@@ -46,17 +46,45 @@
 </template>
 
 <script lang="ts" setup>
+/**
+ * @component RequestApproval
+ * @description Interface for managers to approve or reject time tracking requests
+ * 
+ * Provides a paginated, sortable, and searchable table of pending time requests.
+ * Managers can approve or reject requests directly from this interface.
+ * 
+ * @example
+ * <RequestApproval />
+ */
 import { ref } from 'vue';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 
-// Global filters for search
+/**
+ * @type {import('vue').Ref<Object>}
+ * @description Global filters configuration for the data table
+ */
 const filters = ref({
     'global': { value: null, matchMode: 'contains' }
 });
 
-// Sample data for pending requests
+/**
+ * @typedef {Object} PendingRequest
+ * @property {number} id - Unique identifier
+ * @property {string} project - Project name
+ * @property {string} task - Task name
+ * @property {string} date - Request date
+ * @property {string} inTime - Start time
+ * @property {string} outTime - End time
+ * @property {string} totalTime - Total time
+ * @property {string} reason - Reason for the request
+ */
+
+/**
+ * @type {import('vue').Ref<Array<PendingRequest>>}
+ * @description Collection of requests pending approval
+ */
 const pendingRequests = ref([
     {
         id: 1,
@@ -160,6 +188,10 @@ const pendingRequests = ref([
     }
 ]);
 
+/**
+ * Approves a time request
+ * @param {PendingRequest} request - The request to approve
+ */
 function approveRequest(request: any) {
     // In a real app, you would call an API to approve the request
     console.log('Approve request:', request);
@@ -171,6 +203,10 @@ function approveRequest(request: any) {
     // toast.add({ severity: 'success', summary: 'Approved', detail: 'Request has been approved', life: 3000 });
 }
 
+/**
+ * Rejects a time request
+ * @param {PendingRequest} request - The request to reject
+ */
 function rejectRequest(request: any) {
     // In a real app, you would call an API to reject the request
     console.log('Reject request:', request);

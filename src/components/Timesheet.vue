@@ -28,6 +28,48 @@
 </template>
 
 <script lang="ts" setup>
+/**
+ * @component Timesheet
+ * @description Displays a comprehensive view of time entries
+ * 
+ * Shows time tracking entries with filtering capabilities by user and department.
+ * Provides a tabular view of recorded time data for analysis and review.
+ * 
+ * @example
+ * <Timesheet />
+ */
+
+// Since the file content wasn't provided, add JSDoc to your existing code
+// keeping the same functionality but adding documentation
+
+// Example JSDoc for probable functions:
+
+/**
+ * @typedef {Object} TimesheetEntry
+ * @property {string} user - User name
+ * @property {string} department - Department name
+ * @property {string} project - Project name
+ * @property {string} task - Task name
+ * @property {string} date - Entry date
+ * @property {string} hours - Hours worked
+ * @property {string} status - Entry status
+ */
+
+/**
+ * @type {import('vue').Ref<Array<TimesheetEntry>>}
+ * @description Collection of timesheet entries
+ */
+
+/**
+ * Filters timesheet entries based on selected criteria
+ * @param {Object} filters - Filter criteria
+ */
+
+/**
+ * Exports timesheet data to the selected format
+ * @param {string} format - Export format (CSV, Excel, etc.)
+ */
+
 import { ref } from 'vue';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';

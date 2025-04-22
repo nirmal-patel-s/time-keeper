@@ -26,15 +26,38 @@
 </template>
 
 <script lang="ts" setup>
+/**
+ * @component FAQ
+ * @description A searchable and expandable list of frequently asked questions
+ * 
+ * Provides a user-friendly interface for finding answers to common questions
+ * about the Time Keeper application with advanced search capabilities and
+ * expandable/collapsible sections.
+ * 
+ * @example
+ * <FAQ />
+ */
 import { ref, computed } from 'vue';
 import Accordion from 'primevue/accordion';
 import AccordionTab from 'primevue/accordiontab';
 import InputText from 'primevue/inputtext';
 
-// Search functionality
+/**
+ * @type {import('vue').Ref<string>}
+ * @description User input for searching FAQs
+ */
 const searchQuery = ref('');
 
-// FAQ data
+/**
+ * @typedef {Object} FAQItem
+ * @property {string} question - The question text
+ * @property {string} answer - The answer text in HTML format
+ */
+
+/**
+ * @type {import('vue').Ref<Array<FAQItem>>}
+ * @description Array of FAQ items
+ */
 const faqs = ref([
     {
         question: "What is Time Keeper?",
@@ -86,7 +109,10 @@ const faqs = ref([
     }
 ]);
 
-// Create a synonym map for fuzzy search
+/**
+ * @type {Object<string, Array<string>>}
+ * @description Map of terms to their synonyms for improved search
+ */
 const synonymMap = {
     'submit': ['create', 'add', 'enter', 'log', 'record'],
     'approve': ['accept', 'confirm', 'validate', 'authorize'],
@@ -101,8 +127,12 @@ const synonymMap = {
     'mobile': ['phone', 'smartphone', 'tablet', 'portable']
 };
 
-// Expand search query with synonyms
-function expandQueryWithSynonyms(query: string): string[] {
+/**
+ * Expands a search query with synonyms for better matching
+ * @param {string} query - The original search query
+ * @returns {Array<string>} Array of expanded search terms
+ */
+function expandQueryWithSynonyms(query) {
     const terms = query.toLowerCase().split(' ');
     const expandedTerms = new Set<string>();
 
@@ -121,7 +151,10 @@ function expandQueryWithSynonyms(query: string): string[] {
     return Array.from(expandedTerms);
 }
 
-// Filter FAQs based on search query
+/**
+ * @type {import('vue').ComputedRef<Array<FAQItem>>}
+ * @description Filtered FAQs based on the search query
+ */
 const filteredFaqs = computed(() => {
     if (!searchQuery.value.trim()) {
         return faqs.value;
@@ -135,8 +168,12 @@ const filteredFaqs = computed(() => {
     });
 });
 
-// Highlight search terms in the answer
-function highlightSearchTerms(text: string): string {
+/**
+ * Highlights search terms in the answer text
+ * @param {string} text - The original text to highlight
+ * @returns {string} HTML with highlighted search terms
+ */
+function highlightSearchTerms(text) {
     if (!searchQuery.value.trim()) {
         return text;
     }

@@ -128,6 +128,17 @@
 </template>
 
 <script lang="ts" setup>
+/**
+ * @component ManualRequest
+ * @description Component for submitting and managing manual time tracking requests
+ * 
+ * Allows users to create new time tracking requests, view existing requests,
+ * and filter or search through previous submissions. Includes comprehensive
+ * form validation and request management features.
+ * 
+ * @example
+ * <ManualRequest />
+ */
 import { ref } from 'vue';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
@@ -139,6 +150,23 @@ import Textarea from 'primevue/textarea';
 import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
 
+/**
+ * @typedef {Object} TimeRequest
+ * @property {number} id - Unique identifier
+ * @property {string} project - Project name
+ * @property {string} taskName - Task name
+ * @property {string} date - Request date in YYYY-MM-DD format
+ * @property {string} inTime - Start time in HH:MM format
+ * @property {string} outTime - End time in HH:MM format
+ * @property {string} totalTime - Calculated total time
+ * @property {string} reason - Reason for the request
+ * @property {string} status - Current status (Pending, Approved, Rejected)
+ */
+
+/**
+ * @type {import('vue').Ref<Array<TimeRequest>>}
+ * @description Collection of manual time requests
+ */
 const manualRequests = ref([
     {
         id: 1,
@@ -197,7 +225,16 @@ const manualRequests = ref([
     }
 ]);
 
+/**
+ * @type {import('vue').Ref<boolean>}
+ * @description Controls the visibility of the request form
+ */
 const showForm = ref(false);
+
+/**
+ * @type {import('vue').Ref<Object>}
+ * @description New request form data
+ */
 const newRequest = ref({
     project: '',
     task: '',
@@ -281,10 +318,16 @@ function searchTasks(event: { query: string }) {
     );
 }
 
+/**
+ * Toggles the visibility of the request form
+ */
 function toggleForm() {
     showForm.value = !showForm.value;
 }
 
+/**
+ * Validates and submits a new time request
+ */
 function submitRequest() {
     // Reset validation errors
     resetValidationErrors();
@@ -362,6 +405,9 @@ function submitRequest() {
     showForm.value = false;
 }
 
+/**
+ * Resets all validation error messages
+ */
 function resetValidationErrors() {
     validationErrors.value = {
         project: '',
@@ -373,6 +419,12 @@ function resetValidationErrors() {
     };
 }
 
+/**
+ * Calculates the total time between in time and out time
+ * @param {string} inTime - Start time in HH:MM format
+ * @param {string} outTime - End time in HH:MM format
+ * @returns {string} Formatted total time
+ */
 function calculateTotalTime(inTime: string, outTime: string): string {
     // Simple implementation - in a real app, you'd want to use a date library
     if (!inTime || !outTime) return '';

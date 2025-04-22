@@ -48,16 +48,55 @@
 </template>
 
 <script lang="ts" setup>
+/**
+ * @component Dashboard
+ * @description Dashboard component displaying time tracking analytics and statistics
+ * 
+ * The Dashboard provides a visual overview of time tracking data with multiple charts and 
+ * summary statistics. It serves as the main landing page for users to quickly understand 
+ * their time allocation and project distribution.
+ * 
+ * @example
+ * <Dashboard />
+ */
 import { ref } from 'vue';
 import Chart from 'primevue/chart';
 
-// Summary statistics
+/**
+ * @typedef {Object} ChartOptions
+ * @property {Object} plugins - Chart plugins configuration
+ * @property {Object} scales - Chart scales configuration
+ */
+
+/**
+ * @type {import('vue').Ref<string>}
+ * @description Total hours worked
+ */
 const totalHours = ref('168.5');
+
+/**
+ * @type {import('vue').Ref<string>}
+ * @description Number of pending approvals
+ */
 const pendingApprovals = ref('3');
+
+/**
+ * @type {import('vue').Ref<string>}
+ * @description Number of projects worked on
+ */
 const projectsWorked = ref('5');
+
+/**
+ * @type {import('vue').Ref<string>}
+ * @description Average hours worked per day
+ */
 const averageHoursPerDay = ref('8.4');
 
 // Common chart options
+/**
+ * @type {Object}
+ * @description Common chart options for line and bar charts
+ */
 const chartOptions = {
     plugins: {
         legend: {
@@ -87,6 +126,10 @@ const chartOptions = {
 };
 
 // Pie chart options
+/**
+ * @type {Object}
+ * @description Chart options specific to pie charts
+ */
 const pieChartOptions = {
     plugins: {
         legend: {
@@ -98,6 +141,10 @@ const pieChartOptions = {
 };
 
 // Line chart - Time Tracking Trends
+/**
+ * @type {Object}
+ * @description Data for the time tracking trends line chart
+ */
 const timeTrackingData = {
     labels: ['15 Apr', '16 Apr', '17 Apr', '18 Apr', '19 Apr', '20 Apr', '21 Apr', '22 Apr'],
     datasets: [
