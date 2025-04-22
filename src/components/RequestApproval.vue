@@ -183,7 +183,7 @@ function rejectRequest(request: any) {
 }
 </script>
 
-<style>
+<style scoped>
 .action-buttons {
     display: flex;
     gap: 0.75rem;
@@ -253,11 +253,13 @@ function rejectRequest(request: any) {
 }
 
 /* Fix search icon positioning */
-.p-input-icon-left {
+:deep(.p-input-icon-left) {
     position: relative;
+    width: 300px !important;
+    /* Add fixed width with !important to override any other styles */
 }
 
-.p-input-icon-left i {
+:deep(.p-input-icon-left i) {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -265,7 +267,9 @@ function rejectRequest(request: any) {
     color: var(--text-color-secondary);
 }
 
-.p-input-icon-left input {
+:deep(.p-input-icon-left input) {
     padding-left: 2.5rem;
+    width: 100% !important;
+    /* Make input take full width of container */
 }
 </style>
