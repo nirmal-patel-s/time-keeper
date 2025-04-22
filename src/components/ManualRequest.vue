@@ -513,7 +513,8 @@ function clearFilters() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.75rem;
+    margin-bottom: 8px;
+    margin-top: 8px;
     padding: 0.25rem 0.5rem;
 }
 
