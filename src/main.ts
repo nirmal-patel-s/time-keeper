@@ -116,6 +116,8 @@ app.use(PrimeVue, {
             darkModeSelector: '.my-app-dark',
         },
     },
+    ripple: true,
+    unstyled: false
 });
 
 app.use(router);
