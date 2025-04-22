@@ -19,24 +19,26 @@ const items = ref([
 
 <template>
   <div id="app">
-    <Menubar :model="items" class="custom-menubar" aria-label="Main Navigation">
-      <template #item="{ item, props }">
-        <router-link :to="item.route" custom v-slot="{ href, navigate, isActive }">
-          <a :href="href" @click="navigate" :class="{ 'menu-link': true, 'active-link': isActive }"
-            :aria-current="isActive ? 'page' : undefined">
-            {{ item.label }}
-          </a>
-        </router-link>
-      </template>
-      <template #end>
-        <div class="theme-toggle">
-          <label for="dark-mode-toggle" class="sr-only">Toggle Dark Mode</label>
-          <ToggleSwitch id="dark-mode-toggle" :model-value="isDarkMode" @update:model-value="toggleDarkMode"
-            aria-label="Toggle dark mode" />
-        </div>
-      </template>
-    </Menubar>
-    <main>
+    <header class="sticky-header">
+      <Menubar :model="items" class="custom-menubar" aria-label="Main Navigation">
+        <template #item="{ item, props }">
+          <router-link :to="item.route" custom v-slot="{ href, navigate, isActive }">
+            <a :href="href" @click="navigate" :class="{ 'menu-link': true, 'active-link': isActive }"
+              :aria-current="isActive ? 'page' : undefined">
+              {{ item.label }}
+            </a>
+          </router-link>
+        </template>
+        <template #end>
+          <div class="theme-toggle">
+            <label for="dark-mode-toggle" class="sr-only">Toggle Dark Mode</label>
+            <ToggleSwitch id="dark-mode-toggle" :model-value="isDarkMode" @update:model-value="toggleDarkMode"
+              aria-label="Toggle dark mode" />
+          </div>
+        </template>
+      </Menubar>
+    </header>
+    <main class="main-content">
       <router-view />
     </main>
   </div>
@@ -97,5 +99,40 @@ const items = ref([
 
 .my-app-dark .menu-link:hover {
   background-color: rgba(52, 211, 153, 0.1);
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.custom-menubar {
+  border: none;
+  background-color: var(--emerald-50, #ecfdf5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.my-app-dark .custom-menubar {
+  background-color: var(--emerald-950, #022c22);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Override the PrimeVue default border */
+.p-menubar {
+  border: none !important;
+}
+
+/* Add padding to main content */
+.main-content {
+  padding: 10px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 10px;
+  }
 }
 </style>

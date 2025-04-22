@@ -249,7 +249,7 @@ function rejectRequest(request: any) {
 
 .page-title {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 8px;
 }
 
 /* Fix search icon positioning */
